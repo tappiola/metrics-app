@@ -1,0 +1,41 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum MetricType {
+  STRING
+  NUMBER
+  BOOLEAN
+}
+
+model Metric {
+  id           String         @id
+  description  String
+  type         MetricType
+  reportMetric ReportMetric[]
+}
+
+model ReportMetric {
+  uuid     String @id @default(uuid())
+  metricId String
+  metric   Metric @relation(fields: [metricId], references: [id])
+  reportId String
+  report   Report @relation(fields: [reportId], references: [uuid])
+  value    String
+}
+
+model Report {
+  uuid        String         @id @default(uuid())
+  title       String
+  description String
+  created     DateTime
+  updated     DateTime
+  data        ReportMetric[]
+}

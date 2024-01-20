@@ -3,9 +3,11 @@ version: "3.9"
 services:
   postgres:
     image: postgres
-    environment:
-      - POSTGRES_PASSWORD=verysecretpassword
-      - POSTGRES_USER=Novata
-      - POSTGRES_DB=Novata
+    env_file:
+      - ./server/.env
     ports:
       - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql
+volumes:
+  pg-data:

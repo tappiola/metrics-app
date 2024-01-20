@@ -1,0 +1,22 @@
+[
+  {
+    "id": "e1.1.1",
+    "type": "NUMBER",
+    "description": "Scope 1 Emissions (tCO2e)"
+  },
+  {
+    "id": "e1.2.1",
+    "type": "NUMBER",
+    "description": "Scope 2 Emissions (tCO2e)"
+  },
+  {
+    "id": "e1.3.1",
+    "type": "NUMBER",
+    "description": "Scope 3 Emissions (tCO2e)"
+  },
+  {
+    "id": "e1.4.1",
+    "type": "BOOLEAN",
+    "description": "Net-Zero Target"
+  }
+]
