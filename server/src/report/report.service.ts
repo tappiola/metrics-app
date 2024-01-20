@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import prisma from '../../prisma/prisma';
 import { Prisma, PrismaClient, Report } from '@prisma/client';
 import { ReportResponse } from './report.types';
@@ -27,13 +32,14 @@ export class ReportService {
   }
 
   async getOne(id: string): Promise<ReportResponse> {
-    const { uuid, ...report } = await prisma.report.findUnique({
+    const dbReport = await prisma.report.findUnique({
       select: {
         uuid: true,
         title: true,
         description: true,
         created: true,
         updated: true,
+        userId: true,
         data: {
           select: {
             metricId: true,
@@ -45,6 +51,21 @@ export class ReportService {
         uuid: id,
       },
     });
+
+    if (!dbReport) {
+      throw new HttpException(
+        {
+          code: HttpStatus.NOT_FOUND,
+          message: 'The specified resource was not found',
+        },
+        HttpStatus.NOT_FOUND,
+        {
+          cause: 'No report in DB',
+        },
+      );
+    }
+
+    const { uuid, ...report } = dbReport;
 
     return {
       uuid,

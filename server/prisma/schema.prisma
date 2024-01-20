@@ -38,4 +38,13 @@ model Report {
   created     DateTime
   updated     DateTime
   data        ReportMetric[]
+  userId      String
+  user        User           @relation(fields: [userId], references: [uuid])
+}
+
+model User {
+  uuid         String   @id @default(uuid())
+  email        String
+  passwordHash String
+  report       Report[]
 }
