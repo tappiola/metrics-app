@@ -1,11 +1,6 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import prisma from '../../prisma/prisma';
-import { Prisma, PrismaClient, Report } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { ReportResponse } from './report.types';
 
 @Injectable()
@@ -71,5 +66,39 @@ export class ReportService {
       uuid,
       report,
     };
+  }
+
+  async getAll(userId: string): Promise<ReportResponse[]> {
+    const dbReports = await prisma.report.findMany({
+      select: {
+        uuid: true,
+        title: true,
+        description: true,
+        created: true,
+        updated: true,
+        userId: true,
+        data: {
+          select: {
+            metricId: true,
+            value: true,
+          },
+        },
+      },
+      where: {
+        userId,
+      },
+      orderBy: {
+        created: 'desc',
+      },
+    });
+
+    return dbReports.map((dbReport) => {
+      const { uuid, ...report } = dbReport;
+
+      return {
+        uuid,
+        report,
+      };
+    });
   }
 }

@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Req,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { ReportService } from './report.service';
@@ -15,9 +16,20 @@ import { AuthGuard } from '../auth/auth.guard';
 import { ReportResponse } from './report.types';
 
 @UseGuards(AuthGuard)
-@Controller('report')
+@Controller('reports')
 export class ReportController {
   constructor(private reportService: ReportService) {}
+
+  @Get()
+  async listReports(@Req() request: Request): Promise<ReportResponse[]> {
+    const user = request['user'];
+
+    if (!user.sub) {
+      throw new UnauthorizedException();
+    }
+
+    return this.reportService.getAll(user.sub);
+  }
 
   @Get(':id')
   async getReport(

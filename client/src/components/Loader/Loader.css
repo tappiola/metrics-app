@@ -1,0 +1,12 @@
+.loader {
+  width: 56px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 120;
+}
+
+.loader__circle {
+  fill: gray;
+}
