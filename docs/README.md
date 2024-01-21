@@ -1,8 +1,13 @@
 # Solution for Novata Fullstack Engineer Challenge
 
-## Running locally
+## Running app locally
 
-How to run backend:
+### Prerequisites:
+
+- Docker is installed and running
+
+### How to start backend
+
 1. Navigate to `server` folder
 2. Install dependencies: `npm i`
 3. Create `.env` file by copy-pasting template `.env.example`
@@ -12,7 +17,25 @@ How to run backend:
    - Seed database: `npm run db:seed`
 6. Start backend: `npm run start:dev`
 
-How to run frontend:
+### How to start frontend
+
 1. Navigate to `client` folder
 2. Install dependencies: `npm i`
-3. Run frontend: `npm start`
+3. Start frontend: `npm start`
+
+### Running frontend tests
+
+Sample frontend tests are implemented using Cypress.
+
+Component tests could be run using command `npm test`.
+
+### Running backend tests
+
+Sample backend tests are implemented using `jest`.
+
+Command to run: `npm test`.
+
+### Logging in
+
+Once application is started and DB seed is performed, the following creds can be used for logging in:
+`test@test.com / NovataPass`

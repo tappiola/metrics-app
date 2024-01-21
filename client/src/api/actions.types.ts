@@ -5,6 +5,10 @@ export interface SignInData {
   password: string;
 }
 
-export interface ReportData {
+export interface SignInResponse {
+  access_token: string;
+}
+
+export interface NewReportData {
   [key: string]: MetricType | string;
 }

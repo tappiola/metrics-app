@@ -1,6 +1,8 @@
 import { CSSObjectWithLabel, GroupBase, OptionProps } from "react-select";
 import { MetricOption } from "./CreateReport.types";
 
+// Need to adjust styling of select from react-select library to match other styles.
+// Ideally there should be a solution for accessing root css variables from JS; or CSS variables copy should be saved in JS files.
 export const selectConfig = {
   control: (baseStyles: CSSObjectWithLabel) => ({
     ...baseStyles,

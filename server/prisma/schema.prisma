@@ -22,6 +22,9 @@ model Metric {
   reportMetric ReportMetric[]
 }
 
+// Metrics of all types (string / number / boolean) are saved in DB as strings, as string is the most universal type.
+// It does not cause any issues / data loss, as MetricType is stored for each metric in "metric" table.
+// As an alternative approach JSON format could be used for "value" column in DB.
 model ReportMetric {
   uuid     String @id @default(uuid())
   metricId String

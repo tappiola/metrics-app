@@ -7,10 +7,12 @@ import Input from "../Input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { MetricOption } from "./CreateReport.types";
-import Button, { ButtonVariant } from "../Button/Button";
+import Button, { ButtonVariant } from "../Button";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import "./CreateReport.css";
 import { selectConfig } from "./theme";
+
+const NON_METRIC_FIELDS_COUNT = 3;
 
 const CreateReport = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,12 +43,13 @@ const CreateReport = () => {
   const onConfirm = (formData: { [key: string]: string | MetricType }) => {
     trigger("formStatus");
 
-    if (Object.keys(formData).length <= 3) {
+    if (Object.keys(formData).length <= NON_METRIC_FIELDS_COUNT) {
       return;
     }
 
     mutate(formData, {
       onSuccess: () => {
+        // updating list of reports on new report creation
         queryClient.invalidateQueries({ queryKey: ["listReports"] });
         reset();
         setIsModalOpen(false);
@@ -68,12 +71,14 @@ const CreateReport = () => {
       {isModalOpen && (
         <Modal id="add-report-modal" onCancel={onCancel}>
           <h2>Add report</h2>
+          {/* Due to list of metrics being potentially big. So that form for metrics submission is not too big,
+         only metrics user added appear in the form. */}
           <Select
             value={selectedOptions}
             placeholder="Select metric"
             isMulti
             name="metrics-select"
-            options={(data as Metric[]).map(({ id, description, type }) => ({
+            options={data?.map(({ id, description, type }) => ({
               label: description,
               value: id,
               type,
@@ -106,11 +111,14 @@ const CreateReport = () => {
                 key={value}
                 id={value}
                 label={label}
+                // Metric type influences type of input.
                 type={type === MetricType.Boolean ? "checkbox" : "text"}
+                // Transforming metric ids with dots is required due to react-hook-form treating dots in names as nested form fields.
                 {...register(value.replaceAll(".", "_"), {
                   required:
                     type !== MetricType.Boolean && "Metric value is required",
                   validate: (value) => {
+                    // Metric type is taken into account when applying validation rules.
                     if (type === MetricType.Number && isNaN(value)) {
                       return "Please enter a valid number or remove metric";
                     }
@@ -126,7 +134,7 @@ const CreateReport = () => {
               label=""
               {...register("formStatus", {
                 validate: () =>
-                  Object.keys(getValues()).length > 3 ||
+                  Object.keys(getValues()).length > NON_METRIC_FIELDS_COUNT ||
                   "Please add at least one metric",
               })}
               errorMessage={errors?.formStatus?.message as string}

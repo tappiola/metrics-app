@@ -1,15 +1,15 @@
 .add-report-modal__buttons {
-    display: flex;
-    gap: var(--spacing-1);
-    justify-content: end;
-    margin-block-start: var(--spacing-1);
+  display: flex;
+  gap: var(--spacing-1);
+  justify-content: end;
+  margin-block-start: var(--spacing-1);
 }
 
 .create-report-button {
-    margin-inline: auto 0;
-    margin-block: var(--spacing-3);
+  margin-inline: auto 0;
+  margin-block: var(--spacing-3);
 }
 
 .create-report {
-    text-align: right;
+  text-align: right;
 }

@@ -1,5 +1,6 @@
 version: "3.9"
 
+# 2 more docker services for FE and BE could be added, so that all 3 services are started via one command.
 services:
   postgres:
     image: postgres

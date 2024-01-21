@@ -5,8 +5,8 @@ declare global {
   namespace Cypress {
     interface Chainable {
       mount: typeof mount;
+      customMount: typeof mount;
+      getByTestId(testId: string): Chainable;
     }
   }
 }
-
-Cypress.Commands.add("mount", mount);

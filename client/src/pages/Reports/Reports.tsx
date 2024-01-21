@@ -9,6 +9,7 @@ import CreateReport from "../../components/CreateReport";
 import { Uri } from "../../constants";
 import ReportCard from "../../components/ReportCard";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import axios, { AxiosError } from "axios";
 
 const Reports = () => {
   const navigate = useNavigate();
@@ -18,8 +19,7 @@ const Reports = () => {
   });
 
   useEffect(() => {
-    // @ts-ignore
-    if (error?.response?.status === 401) {
+    if (axios.isAxiosError(error) && error.response?.status === 401) {
       navigate(Uri.Login);
     }
   }, [error, navigate]);
@@ -36,7 +36,7 @@ const Reports = () => {
     <div className="reports">
       <h1>Reports</h1>
       <CreateReport />
-      {data.map((report: Report) => (
+      {data?.map((report: Report) => (
         <ReportCard key={report.uuid} data={report} />
       ))}
     </div>

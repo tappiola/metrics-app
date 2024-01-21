@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import Input from "../../components/Input";
 import { getAuthToken, setAuthToken } from "../../utils/localStorage";
 import { Uri } from "../../constants";
-import Button from "../../components/Button/Button";
+import Button from "../../components/Button";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Card from "../../components/Card";
 
@@ -32,7 +32,7 @@ const Login = () => {
 
   const { mutate, error } = useMutation({
     mutationFn: login,
-    onSuccess: (res: { access_token: string }) => {
+    onSuccess: (res) => {
       setAuthToken(res.access_token);
       navigate(Uri.Reports, { replace: true });
     },

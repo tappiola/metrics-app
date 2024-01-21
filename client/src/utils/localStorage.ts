@@ -2,6 +2,9 @@ import { jwtDecode } from "jwt-decode";
 
 const ACCESS_TOKEN_KEY = "access_token";
 
+// Storing auth token in local storage is not the best practice.
+// It's because local storage could be accessed by any JavaScript.
+// Ideally, should be stored in cookie with `httpOnly` and `secure` attributes set.
 export const setAuthToken = (token: string) => {
   return localStorage.setItem(ACCESS_TOKEN_KEY, token);
 };

@@ -8,5 +8,5 @@
 }
 
 .loader__circle {
-  fill: gray;
+  fill: var(--color-grey);
 }

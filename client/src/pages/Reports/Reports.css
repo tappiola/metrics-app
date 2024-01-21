@@ -1,5 +1,5 @@
 .reports {
-    margin-inline: var(--spacing-3);
-    margin-block-end: var(--spacing-3);
-    min-height: 100vh;
+  margin-inline: var(--spacing-3);
+  margin-block-end: var(--spacing-3);
+  min-height: 100vh;
 }
