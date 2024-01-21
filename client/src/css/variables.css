@@ -1,0 +1,22 @@
+:root {
+  --color-primary: #2dd4bf;
+  --color-grey: #bdbdbd;
+  --color-error: #cd5c5c;
+  --table-border-color: #424b57;
+  --background-dark: #111827;
+  --background-pale: #202836;
+  --font-color: #e2e3e5;
+  --font-color-dark: #030712;
+
+  --border: 1px solid var(--table-border-color);
+  --border-radius: 6px;
+  --border-radius-large: 16px;
+
+  --spacing-0: 4px;
+  --spacing-1: 8px;
+  --spacing-2: 12px;
+  --spacing-3: 16px;
+  --spacing-4: 24px;
+  --spacing-5: 36px;
+  --spacing-6: 48px;
+}

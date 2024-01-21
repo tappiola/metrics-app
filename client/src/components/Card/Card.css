@@ -1,8 +1,14 @@
+@import 'css/variables.css';
+
 .card {
-  padding: 16px;
-  border-radius: 10px;
-  background-color: #c4c2c2;
+  padding: var(--spacing-3);
+  border-radius: var(--border-radius-large);
+  background-color: var(--background-pale);
   position: relative;
   min-width: 100px;
   min-height: 80px;
+}
+
+.card + .card {
+  margin-block-start: var(--spacing-5);
 }

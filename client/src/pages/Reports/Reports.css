@@ -1,7 +1,5 @@
 .reports {
-}
-
-.report-metrics {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
+    margin-inline: var(--spacing-3);
+    margin-block-end: var(--spacing-3);
+    min-height: 100vh;
 }

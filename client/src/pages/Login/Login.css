@@ -1,2 +1,14 @@
-.home-page {
+.login {
+  min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+  width: 400px;
+}
+
+.login-button {
+  margin-block: var(--spacing-3) var(--spacing-1);
 }

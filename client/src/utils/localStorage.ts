@@ -10,11 +10,15 @@ export const getAuthToken = () => {
   const token = localStorage.getItem(ACCESS_TOKEN_KEY);
 
   if (token) {
-    const payload = jwtDecode(token);
+    try {
+      const payload = jwtDecode(token);
 
-    // Remove expired token from local storage to force new login
-    if ((payload.exp || 0) < Date.now() / 1000) {
-      localStorage.removeItem(ACCESS_TOKEN_KEY);
+      // Remove expired token from local storage to force new login
+      if ((payload.exp || 0) < Date.now() / 1000) {
+        localStorage.removeItem(ACCESS_TOKEN_KEY);
+      }
+    } catch (e) {
+      throw e;
     }
   }
 

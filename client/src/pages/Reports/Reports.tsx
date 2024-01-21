@@ -3,10 +3,12 @@ import "./Reports.css";
 import { useQuery } from "@tanstack/react-query";
 import { fetchReports } from "../../api/actions";
 import { useNavigate } from "react-router";
-import Loader from "../../components/Loader/Loader";
-import Card from "../../components/Card";
+import Loader from "../../components/Loader";
 import { Report } from "./Reports.types";
-import CreateReport from "../../components/CreateReport/CreateReport";
+import CreateReport from "../../components/CreateReport";
+import { Uri } from "../../constants";
+import ReportCard from "../../components/ReportCard";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 const Reports = () => {
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ const Reports = () => {
   useEffect(() => {
     // @ts-ignore
     if (error?.response?.status === 401) {
-      navigate("/login");
+      navigate(Uri.Login);
     }
   }, [error, navigate]);
 
@@ -27,30 +29,16 @@ const Reports = () => {
   }
 
   if (isError) {
-    return <p>Something went wrong</p>;
+    return <ErrorMessage text={error.message} />;
   }
 
   return (
     <div className="reports">
-      <CreateReport />
       <h1>Reports</h1>
-      <Card>
-        {data.map(({ uuid, report }: Report) => (
-          <div key={uuid}>
-            <h2>{report.title}</h2>
-            <h3>{report.description}</h3>
-            <dl className="report-metrics">
-              {report.data.map(({ metricId, value }) => (
-                // TODO: Make better markup
-                <div key={metricId}>
-                  <dt key={metricId}>{metricId}</dt>
-                  <dd>{value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        ))}
-      </Card>
+      <CreateReport />
+      {data.map((report: Report) => (
+        <ReportCard key={report.uuid} data={report} />
+      ))}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import { ModalProps } from "./Modal.types";
-import "./Modal.styles.css";
+import "./Modal.css";
 import { createRef, useEffect } from "react";
 
 const Modal = ({ children, id, onCancel, className }: ModalProps) => {
