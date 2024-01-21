@@ -10,8 +10,8 @@
 
 1. Navigate to `server` folder
 2. Install dependencies: `npm i`
-3. Create `.env` file by copy-pasting template `.env.example`
-4. Start database in docker: `docker compose up` 
+3. Create `.env` file by copying contents of `.env.example`
+4. Start database server in docker: `docker compose up` 
 5. Populate database:
    - Apply DB migrations: `npm run db:migrate:dev`
    - Seed database: `npm run db:seed`
@@ -39,3 +39,21 @@ Command to run: `npm test`.
 
 Once application is started and DB seed is performed, the following creds can be used for logging in:
 `test@test.com / NovataPass`
+
+### Main screens
+
+Login form:
+
+![login-form](./files/login-form.png)
+
+Report creation:
+
+![report-create](./files/report-create.png)
+
+Report create form validation:
+
+![report-validate](./files/report-validate.png)
+
+List of reports:
+
+![reports-list](./files/reports-list.png)

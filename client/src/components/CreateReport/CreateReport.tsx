@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createReport, fetchMetrics } from "../../api/actions";
-import { Metric, MetricType } from "../../pages/Reports/Reports.types";
+import { MetricType } from "../../pages/Reports/Reports.types";
 import Input from "../Input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
@@ -57,6 +57,8 @@ const CreateReport = () => {
       },
     });
   };
+
+  const normalizeMetricId = (id: string) => id.replaceAll(".", "_");
 
   return (
     <>
@@ -114,7 +116,7 @@ const CreateReport = () => {
                 // Metric type influences type of input.
                 type={type === MetricType.Boolean ? "checkbox" : "text"}
                 // Transforming metric ids with dots is required due to react-hook-form treating dots in names as nested form fields.
-                {...register(value.replaceAll(".", "_"), {
+                {...register(normalizeMetricId(value), {
                   required:
                     type !== MetricType.Boolean && "Metric value is required",
                   validate: (value) => {
@@ -126,7 +128,7 @@ const CreateReport = () => {
                     return true;
                   },
                 })}
-                errorMessage={errors?.[value]?.message as string}
+                errorMessage={errors?.[normalizeMetricId(value)]?.message as string}
               />
             ))}
             <Input

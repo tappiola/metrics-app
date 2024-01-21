@@ -9,7 +9,7 @@ import CreateReport from "../../components/CreateReport";
 import { Uri } from "../../constants";
 import ReportCard from "../../components/ReportCard";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 const Reports = () => {
   const navigate = useNavigate();

@@ -68,7 +68,7 @@ const seedDatabase = async () => {
                 },
                 {
                   metricId: 'e1.4.1',
-                  value: 'yes',
+                  value: 'true',
                 },
                 {
                   metricId: 'e1.5.1',

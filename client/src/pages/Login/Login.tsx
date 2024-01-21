@@ -44,10 +44,6 @@ const Login = () => {
     mutate(formData);
   };
 
-  if (error) {
-    return <ErrorMessage text={error.message} />;
-  }
-
   return (
     <div className="login">
       <Card className="login-card">
@@ -74,10 +70,10 @@ const Login = () => {
             errorMessage={errors.password?.message}
             {...register("password", { required: "Password is required" })}
           />
+          {error && <ErrorMessage text={error.message} /> }
           <Button className="login-button" type="submit" data-cy="login-button">
             Login
           </Button>
-          {error && <p>{error}</p>}
         </form>
       </Card>
     </div>
