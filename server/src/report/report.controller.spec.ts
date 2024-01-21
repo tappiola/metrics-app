@@ -33,11 +33,6 @@ describe('Report', () => {
   });
 
   describe('GET /reports', () => {
-    it(`should return 401 when without auth`, async () => {
-      const response = await request(app.getHttpServer()).get('/reports');
-      expect(response.status).toEqual(401);
-    });
-
     it(`should return list of reports`, async () => {
       const response = await request(app.getHttpServer())
         .get('/reports')
@@ -45,6 +40,11 @@ describe('Report', () => {
 
       expect(response.status).toEqual(200);
       expect(response.body).toEqual(reportService.getAll());
+    });
+
+    it(`should return 401 when called without auth`, async () => {
+      const response = await request(app.getHttpServer()).get('/reports');
+      expect(response.status).toEqual(401);
     });
   });
 

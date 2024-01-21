@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import prisma from '../../prisma/prisma';
 import { ReportDto, ReportResponse } from './report.types';
 
@@ -51,16 +51,7 @@ export class ReportService {
     });
 
     if (!dbReport) {
-      throw new HttpException(
-        {
-          code: HttpStatus.NOT_FOUND,
-          message: 'The specified resource was not found',
-        },
-        HttpStatus.NOT_FOUND,
-        {
-          cause: 'No report in DB',
-        },
-      );
+      throw new NotFoundException();
     }
 
     const { uuid, ...report } = dbReport;

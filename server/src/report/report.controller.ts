@@ -1,13 +1,11 @@
 import {
   Body,
   Controller,
+  ForbiddenException,
   Get,
-  HttpException,
-  HttpStatus,
   Param,
   Post,
   Req,
-  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { ReportService } from './report.service';
@@ -22,11 +20,6 @@ export class ReportController {
   @Get()
   async listReports(@Req() request: Request): Promise<ReportResponse[]> {
     const user = request['user'];
-
-    if (!user.sub) {
-      throw new UnauthorizedException();
-    }
-
     return this.reportService.getAll(user.sub);
   }
 
@@ -40,13 +33,7 @@ export class ReportController {
     const reportResponse = await this.reportService.getOne(id);
 
     if (user.sub !== reportResponse.report.userId) {
-      throw new HttpException(
-        {
-          code: HttpStatus.FORBIDDEN,
-          message: 'The client does not have access rights to the content',
-        },
-        HttpStatus.FORBIDDEN,
-      );
+      throw new ForbiddenException();
     }
 
     return reportResponse;

@@ -2,9 +2,9 @@
   "name": "novata_server",
   "version": "1.0.0",
   "description": "Novata tech task basic server",
-  "main": "index.js",
   "scripts": {
     "start:dev": "nest start --watch",
+    "build": "nest build",
     "db:migrate:dev": "npx prisma migrate dev --skip-seed",
     "db:migrate:reset": "npx prisma migrate reset",
     "db:seed": "npx prisma db seed",
