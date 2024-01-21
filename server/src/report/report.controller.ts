@@ -11,9 +11,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ReportService } from './report.service';
-import { Report } from '@prisma/client';
 import { AuthGuard } from '../auth/auth.guard';
-import { ReportResponse } from './report.types';
+import { ReportDto, ReportResponse } from './report.types';
 
 @UseGuards(AuthGuard)
 @Controller('reports')
@@ -56,17 +55,10 @@ export class ReportController {
   @Post()
   create(
     @Req() request: Request,
-    @Body() report: Report,
+    @Body() report: ReportDto,
   ): Promise<ReportResponse> {
     const user = request['user'];
 
-    return this.reportService.create({
-      ...report,
-      user: {
-        connect: {
-          uuid: user.sub,
-        },
-      },
-    });
+    return this.reportService.create(report, user.sub);
   }
 }

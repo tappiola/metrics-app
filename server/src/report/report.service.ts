@@ -1,28 +1,31 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import prisma from '../../prisma/prisma';
-import { Prisma } from '@prisma/client';
-import { ReportResponse } from './report.types';
+import { ReportDto, ReportResponse } from './report.types';
 
 @Injectable()
 export class ReportService {
-  async create(newReport: Prisma.ReportCreateInput): Promise<ReportResponse> {
-    const { data, ...reportFields } = newReport;
+  async create(report: ReportDto, userId: string): Promise<ReportResponse> {
+    const { data, ...reportFields } = report;
 
-    const { uuid, ...report } = await prisma.report.create({
+    const { uuid, ...createdReport } = await prisma.report.create({
       data: {
         ...reportFields,
         created: new Date(),
         updated: new Date(),
         data: {
-          // @ts-ignore
           create: data,
+        },
+        user: {
+          connect: {
+            uuid: userId,
+          },
         },
       },
     });
 
     return {
       uuid,
-      report,
+      report: createdReport,
     };
   }
 

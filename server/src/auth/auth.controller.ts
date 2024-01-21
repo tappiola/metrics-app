@@ -7,7 +7,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { SignInRequest } from './auth.types';
+import { SignInDto } from './auth.types';
 
 @Controller('auth')
 export class AuthController {
@@ -17,7 +17,7 @@ export class AuthController {
   @Post('login')
   async signIn(
     @Res({ passthrough: true }) response: Response,
-    @Body() signInDto: SignInRequest,
+    @Body() signInDto: SignInDto,
   ) {
     const token = await this.authService.signIn(
       signInDto.email,

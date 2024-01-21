@@ -1,17 +1,18 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
+import prisma from '../../prisma/prisma';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private usersService: UsersService,
-    private jwtService: JwtService,
-  ) {}
+  constructor(private jwtService: JwtService) {}
 
   async signIn(email: string, password: string) {
-    const user = await this.usersService.findOne(email);
+    const user = await prisma.user.findFirst({
+      where: {
+        email: email,
+      },
+    });
 
     if (!user) {
       throw new UnauthorizedException();

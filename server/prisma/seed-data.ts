@@ -39,7 +39,7 @@ export const NORMAL_USER_1: User = {
 export const NORMAL_USER_2: User = {
   uuid: 'b5faa046-44ae-49d2-8a2c-4441c58688ac',
   email: 'test2@test.com',
-  passwordHash: '$2a$10$E.L3BDn0jFp1WWYaY8z3fOT.1S66tjCJcesCXXIveohBEhmVi1.o2',
+  passwordHash: '$2a$10$DhqI5vkKpK1b3.iSSK7SSucb834tjKgb8flpTkGGEaJIw/4HsK/QC',
 };
 
 // Password for this user is London2024
