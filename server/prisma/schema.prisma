@@ -1,0 +1,53 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum MetricType {
+  STRING
+  NUMBER
+  BOOLEAN
+}
+
+model Metric {
+  id           String         @id
+  description  String
+  type         MetricType
+  reportMetric ReportMetric[]
+}
+
+// Metrics of all types (string / number / boolean) are saved in DB as strings, as string is the most universal type.
+// It does not cause any issues / data loss, as MetricType is stored for each metric in "metric" table.
+// As an alternative approach JSON format could be used for "value" column in DB.
+model ReportMetric {
+  uuid     String @id @default(uuid())
+  metricId String
+  metric   Metric @relation(fields: [metricId], references: [id])
+  reportId String
+  report   Report @relation(fields: [reportId], references: [uuid])
+  value    String
+}
+
+model Report {
+  uuid        String         @id @default(uuid())
+  title       String
+  description String
+  created     DateTime
+  updated     DateTime
+  data        ReportMetric[]
+  userId      String
+  user        User           @relation(fields: [userId], references: [uuid])
+}
+
+model User {
+  uuid         String   @id @default(uuid())
+  email        String
+  passwordHash String
+  report       Report[]
+}

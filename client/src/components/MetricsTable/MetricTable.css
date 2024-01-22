@@ -1,0 +1,43 @@
+@import "css/variables.css";
+
+.csv-template-table {
+  overflow-x: auto;
+}
+
+/* ideally selectors should be more specific */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: var(--border);
+  border-radius: var(--border-radius-large);
+  background-color: var(--background-dark);
+}
+
+td,
+th {
+  border-inline-start: var(--border);
+  border-block-start: var(--border);
+}
+
+td:first-child,
+th:first-child {
+  border-inline-start: none;
+}
+
+th {
+  border-block-start: none;
+
+  &:last-child {
+    border-start-end-radius: var(--border-radius-large);
+  }
+
+  &:first-child {
+    border-start-start-radius: var(--border-radius-large);
+  }
+}
+
+th,
+td {
+  padding: var(--spacing-2);
+}

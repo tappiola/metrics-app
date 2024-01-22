@@ -1,0 +1,45 @@
+@import "css/variables.css";
+
+.input {
+  font-size: 16px;
+  background: var(--background-dark);
+  padding: var(--spacing-2);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  color: var(--font-color);
+  width: 100%;
+}
+
+.input:hover {
+  border-color: var(--color-primary);
+}
+
+.input-wrapper:not(.input-wrapper--checkbox) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-0);
+  padding-block: var(--spacing-0);
+}
+
+.input-wrapper--checkbox {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: var(--spacing-1);
+  align-items: center;
+  justify-content: start;
+  padding-block: var(--spacing-1);
+}
+
+.input-wrapper--checkbox input {
+  width: 16px;
+  height: 16px;
+}
+
+.input__error-message {
+  color: var(--color-error);
+}
+
+.input--invalid {
+  border-color: var(--color-error);
+}
