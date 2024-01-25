@@ -30,7 +30,7 @@ const CreateReport = () => {
     getValues,
     trigger,
     reset,
-  } = useForm();
+  } = useForm({ shouldUnregister: true });
 
   const { isError, mutate, isPending, error } = useMutation({
     mutationFn: createReport,
@@ -128,7 +128,9 @@ const CreateReport = () => {
                     return true;
                   },
                 })}
-                errorMessage={errors?.[normalizeMetricId(value)]?.message as string}
+                errorMessage={
+                  errors?.[normalizeMetricId(value)]?.message as string
+                }
               />
             ))}
             <Input

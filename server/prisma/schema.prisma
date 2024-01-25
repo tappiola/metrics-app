@@ -30,7 +30,7 @@ model ReportMetric {
   metricId String
   metric   Metric @relation(fields: [metricId], references: [id])
   reportId String
-  report   Report @relation(fields: [reportId], references: [uuid])
+  report   Report @relation(fields: [reportId], references: [uuid], onDelete: Cascade)
   value    String
 }
 
