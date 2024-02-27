@@ -23,6 +23,11 @@
 2. Install dependencies: `npm i`
 3. Start frontend: `npm start`
 
+### Logging in
+
+Once application is started and DB seed is performed, the following creds can be used for logging in:
+`test@test.com / SamplePass`
+
 ### Running frontend tests
 
 Sample frontend tests are implemented using Cypress.
@@ -35,25 +40,20 @@ Sample backend tests are implemented using `jest`.
 
 Command to run: `npm test`.
 
-### Logging in
-
-Once application is started and DB seed is performed, the following creds can be used for logging in:
-`test@test.com / SamplePass`
-
 ### Main screens
 
 Login form:
 
-![login-form](./files/login-form.png)
+![login-form](./docs/files/login-form.png)
 
 Report creation:
 
-![report-create](./files/report-create.png)
+![report-create](./docs/files/report-create.png)
 
 Report create form validation:
 
-![report-validate](./files/report-validate.png)
+![report-validate](./docs/files/report-validate.png)
 
 List of reports:
 
-![reports-list](./files/reports-list.png)
+![reports-list](./docs/files/reports-list.png)
