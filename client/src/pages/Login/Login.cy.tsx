@@ -19,12 +19,12 @@ describe("<Login />", () => {
     cy.customMount(<Login />);
 
     cy.getByTestId("email").type("test@test.com");
-    cy.getByTestId("password").type("NovataPass");
+    cy.getByTestId("password").type("SamplePass");
     cy.getByTestId("login-button").click();
 
     cy.wait("@login").then(({ request }) => {
       expect(request.body.email).to.equal("test@test.com");
-      expect(request.body.password).to.equal("NovataPass");
+      expect(request.body.password).to.equal("SamplePass");
       cy.location().should((location) => {
         expect(location.pathname).to.eq(Uri.Reports);
       });

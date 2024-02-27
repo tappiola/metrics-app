@@ -1,7 +1,6 @@
 {
-  "name": "novata_server",
+  "name": "server",
   "version": "1.0.0",
-  "description": "Novata tech task basic server",
   "scripts": {
     "start:dev": "nest start --watch",
     "build": "nest build",

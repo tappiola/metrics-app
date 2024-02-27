@@ -28,11 +28,11 @@ export const METRICS: Metric[] = [
   },
 ];
 
-// Password for this user is NovataPass
+// Password for this user is SamplePass
 export const NORMAL_USER_1: User = {
   uuid: 'c09713f3-5a2a-484d-9d3b-a3c74db70048',
   email: 'test@test.com',
-  passwordHash: '$2a$10$E.L3BDn0jFp1WWYaY8z3fOT.1S66tjCJcesCXXIveohBEhmVi1.o2',
+  passwordHash: '$2a$12$vlk.nkMf8zdiR0HiZRPFoe0NoZZ59W6JOG3zHRA9VslbLEM1dkNE2',
 };
 
 // Password for this user is LondonEye
